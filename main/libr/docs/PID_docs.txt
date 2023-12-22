@@ -1,0 +1,58 @@
+PID documentation
+
+Cole Johnson 12/5/23
+
+this is documentation for the PID method and should be used to create pid objects which can be 
+used for pid calculations.
+
+    Constructor and init function
+
+the pid object can be created by calling
+
+from PID import create_PID
+pid = create_PID()
+
+there are no parameters for the init function, however there is some things that must be done before it can
+be properly used.
+
+
+    method / class functions
+
+there are a lot of functions here, so I am assuming you know what pids are.
+
+the get_kp() function returns the current kp value (by defualt its None)
+the set_kp(new_kp) function allows the user to set a kp value.
+
+the get_ki() function returns the current ki value (by defualt its None)
+the set_ki(new_ki) function allows the user to set a ki value.
+
+the get_kd() function returns the current kd value (by defualt its None)
+the set_kd(new_kd) function allows the user to set a kd value.
+
+the get_kpid() function returns the current k values in a tuple with the format (kp, ki, kd).
+the set_kpid(new_kpid) function allows the user to pass a tuple to set the k values. must be in the format (kp, ki, kd).
+
+the get_goal() function returns the current goal point in the system.
+the set_goal(new_goal) function allows the user to set the goal of the system.
+
+the range of the system is the amount of error in the system that is acceptable as it is unlikely the error will ever
+be 0. in short, the higher the range the less accuracy of the pid and the lower the range the higher the accuracy.
+That being said it can be hard for a system to get within a small range.
+the get_range() function returns the current range value.
+the set_range(new_range) funciton allows the user to set the range of the pid.
+
+the config_complete() function will return true if the above set function have been used to give the values
+a value other than None. If the function returns true it means tht you can start using the pid to calculate 
+without errors.
+
+the calculate(current_data) function will take the error as error = goal point - current_data and run a pid
+with that error. this is useful for pids working in 1 dimension.
+note that current_data should be some input from a sensor.
+
+the error_in_range() function will check if the error is within the range given and will return true when it it.
+note that there can be issues when working with pids in multiple dimension.
+
+the calculate_by_error(current_error) will run the pid with the error passed to it. this is useful for pids
+working in multiple dimensions. However you will have to derive the error in the system yourself.
+
+the reset() function can be used to reset the error in the system, as it will set the system error to 0.

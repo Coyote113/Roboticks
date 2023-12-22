@@ -1,0 +1,54 @@
+framework documentation
+
+Cole Johnson 12/5/23
+
+this is documentation for the framework method which has multiple function that were useful to this project. 
+
+    Constructor
+
+the fw object can be created by calling
+
+import framework as fw
+
+    method functions
+
+the interval_mapping(x, in_min, in_max, out_min, out_max) function maps x from in_min and in_max to out_min and out_max.
+it then returns that value.
+
+the charge(x) function gets the charge of x, be it 1, -1, or 0.
+
+the degree_arc_calc(current, target) function gets the degree difference between 2 different degrees on a unit circle.
+note that this does work over 0-360.
+
+the distance(point1, point2) function gets the distance between point1 and point2.
+note that point1=(x1, y1) and point2 = (x2, y2)
+
+the get_raw_angle(point1, point2, round_to_dec = 1) function gets the angle between 2 points to some resolution.
+(1 by default).
+
+note that the next few are about working in both normal and gps degrees.
+we needed a system to go between them.
+
+the get_parallel_deg_format_tuple() function creates 2 parallel arrays in a tuple. one is a 0 to 359 representing
+normal polar degrees, and the other is how gps polar is mapped to each of those values
+
+the get_dict_of_polar_degrees(normal_gps_tuple) uses the function above as an input to creat a dict object 
+so that the 2 arrays can be mapped using a dict.
+
+its meant to be used by saying
+
+dictt = get_dict_of_polar_degrees(get_parallel_deg_format_tuple())
+
+and now dictt is a dict of gps polar to normal polar or normal polar to gps polar degrees.
+
+the angle_from_dict(angle, dictt, round_to_dec = 0) function can use the dict created to return a passed 
+degree value in to its other polar type.
+
+the is_angle_greater_than_base(base, angle) function is used to check if an angle is greater than a base angle.
+note that this works over 0-360.
+
+the approx_error(robot_pos, robot_angle, desired_pos, degree_dict, turn_multi = 1.0) funciton is used to get the error
+in a 2d system which is then passed to the pid.
+the input are the robots current gps position, its current angle, the desired position, the dict created earlier,
+and a multiplier which relates to how much the robots turn error is taken into account when calculating the final error.
+it returns a tuple in the format (m1 distance error, m2 distance error, m1 turn error, m2 turn error)

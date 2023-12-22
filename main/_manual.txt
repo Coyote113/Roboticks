@@ -1,0 +1,35 @@
+This is the manual for the robot controlled by this program.
+
+Cole Johnosn 11/20/23
+
+To edit data in the path file, you can use thonny ide (https://thonny.org/)
+
+    connect your device to the pico w board in the robot and open thonny
+
+    in the bottom right of the screen click 'Local Python 3'
+
+    there should be an option to connect to the pico w microcontroller, click on that to connect
+
+    open the '_path.txt' file
+
+    add your gps points here, note that line 1 is the first point, line 2 is the second point, etc
+
+
+To start the robot flip the power switch at the back
+
+    the red light will flash for 10-100 seconds (maybe more) as the gps gets setup
+
+    when the green light turns on you can press the green button to start the pathfinding algorithm
+
+    once it starts you can click either button to stop it
+
+
+to add points to the path.txt file without opening up the robot
+
+    when the green light turns on after the gps is setup press the blue button
+
+    after that first press everytime you press the blue button it will save your current gps location to its RAM
+
+    if you press the green button it will flush the points stored in the RAM to the path file
+
+    note that this will write over the points already in the path file

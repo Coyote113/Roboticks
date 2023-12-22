@@ -1,0 +1,62 @@
+ACCELERATION_SENSOR documentation
+
+Cole Johnson 11/21/23
+
+this is documentation for the ACCELERATION_SENSOR method and should be used to read ADC values from an acceleration
+sensor, specifically a ADXL335.
+
+
+    Constructor and init function
+
+the accel object can be created by calling
+
+from ACCELERATION_SENSOR.py import create_ACCELERATION_SENSOR
+accel = create_ACCELERATION_SENSOR(x_pin, y_pin, z_pin)
+
+the parameters for the init function are the x, y, and z ADC input pins running from the acceleration sensor
+to the board. Remember that they must be using ADC pins.
+accel is now you acceleration sensor object.
+
+
+    method / class functions
+
+the function get_tilt_tuple_pitch_roll() returns a 2 variable tuple in the format (current_pitch, current_roll).
+
+example:
+tuple = accel.get_tilt_tuple_pitch_roll()
+pitch = tuple[0]
+roll = tuple[1]
+
+or
+
+pitch = accel.get_tilt_tuple_pitch_roll()[0]
+roll = accel.get_tilt_tuple_pitch_roll()[1]
+
+the function get_accel_tuple_xyz() returns a 3 variable tuple in the format 
+(acceleration_in_x_direction, acceleration_in_y_direction, acceleration_in_z_direction)
+
+example:
+tuple = accel.get_accel_tuple_xyz()
+x_acceleration = tuple[0]
+y_acceleration = tuple[1]
+z_acceleration = tuple[2]
+
+
+    Notes
+
+there are other functions in the method, however they are used for calculating the acceleration or angle of the
+acceleration sensor. those are read_acceleration(para), and calculate_tilt_angles(para). in most situations you
+should only be calling the method / class functions stated above.
+
+
+example:
+from ACCELERATION_SENSOR.py import create_ACCELERATION_SENSOR
+accel = create_ACCELERATION_SENSOR(28, 27, 26) # constructor init function
+
+while True
+    pitch = accel.get_tilt_tuple_pitch_roll()[0]
+    roll = accel.get_tilt_tuple_pitch_roll()[1]
+    x_acceleration = accel.get_accel_tuple_xyz()[0]
+    y_acceleration = accel.get_accel_tuple_xyz()[1]
+    z_acceleration = accel.get_accel_tuple_xyz()[2]
+    # add a slight delay

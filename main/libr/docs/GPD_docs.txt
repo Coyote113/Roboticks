@@ -1,0 +1,67 @@
+GPD documentation
+
+Cole Johnson 12/5/23
+
+this is documentation for the GPD method and should be used to read or write gps points to a text file.
+
+    Constructor and init function
+
+the gpd object can be created by calling
+
+from GPD import create_GPD
+gpd = create_GPD(file_name, auto_read_txt = False)
+
+the parameters for the init function are the file name of the file you want to read and write to, and if you
+want to read the text file upon creation of the class however this is disabled by default.
+
+    method / class functions
+
+the read_txt_to_arr() function will convert the data in the text file to an array stored in the class.
+you will need to call this before using most of the other functions if you keep auto_read_txt as false.
+note that it will return the array but it can be more efficient to allow the class to handler the array as after
+being created it is saved in the class.
+
+the get_full_gpd_arr() function is another way to get the full array of gps points without having to reread the text
+file. it instead gets it from the class and returns it.
+
+the gpd_exists() function checks if the gpd array is empty or DNE / None. If so it returns false otherwise if the
+gpd array exists and is not empty it returns true.
+
+the write_arr_to_txt(array) function takes an array parameter and will write it to the text file.
+note that this will write over the data in the text file.
+also note that it will not reread the text file to gpd array, so you will have to call read_txt_to_arr()
+after calling this one if you also want to update the internal gpd array.
+
+the following function relate to the gpd array stored in the class.
+this is the array of gps points gotten and saved with the read_txt_to_arr() function.
+
+the get_current_point_in_arr_str() function gets the current point in the gpd array and returns it as a string.
+
+the get_current_point_in_arr_float() function gets the current point in the gpd array and returns it as a float.
+
+the get_current_point_in_arr_float_lon() and get_current_point_in_arr_float_lat() function will just get the lon or lat
+of the current point as a float value.
+
+the jump_idx(jump = 1) function will jump ahead the current point of the gpd array by 1 (by defualt).
+
+the reset_idx() function will reset the current point back to the first point in the gpd array.
+
+the get_idx() function gets the index of the current point in the gpd array.
+
+the at_end_of_gpd_arr() and at_start_of_gpd_arr() function will return true if the current point being read is at
+the end or start of the gpd array.
+
+the len_of_gpd_arr() function gets the number of gps points in the gpd array / the text file
+
+example:
+
+gpd = create_GPD("file.txt")
+gpd.read_txt_to_arr()
+
+print(gpd.get_full_gpd_arr())
+
+arr = [(1, 1), (2, 2), (3, 3)]
+gpd.write_arr_to_txt(arr)
+gpd.read_txt_to_arr()
+
+print(gpd.get_full_gpd_arr())

@@ -1,0 +1,79 @@
+MOTOR_CONTROLLER documentation
+
+Cole Johnson 11/29/23
+
+this is documentation for the MOTOR_CONTROLLER method and should be used to change the voltages being sent to
+a 2 motor motor controller.
+
+    Constructor and init function
+
+the motor object can be created by calling
+
+from MOTOR_CONTROLLER.py import create_MOTOR_CONTROLLER
+motor = create_MOTOR_CONTROLLER(pin_m1_in1, pin_m1_in2, pin_m2_in3, pin_m2_in4, frq = 50,
+                                v_in_min = 0, v_in_max = 5, d_out_min = 0, d_out_max = 65535)
+
+the parameters for the init function are the 4 input pins, the first 2 control motor 1 and the second 2 control
+motor 2. pin_m1_in1 is the forward input pin for motor 1, pin_m1_in2 is the reverse input pin for motor 1, 
+pin_m2_in3 is the forward input pin for motor 2, and pin_m2_in4 is the reverse input pin for motor 2.
+
+the other parameters will allow the motor to accept input from 5 to -5 (-5 being full speed in reverse) for a u16
+PWM output.
+
+frq is the frequency that information is being send, 50 is generally a good number for this.
+
+v_in_min and v_in_max are the max and min absolute value of the voltage inputs. it is the max and min voltages that
+can be send to the motors by the motor controller.
+
+d_out_min and d_out_max are the max and min PWM values that your board can output. for a pico using u16 the max is
+65535 or 2**16 and the min is a lack of pulse or 0.
+
+
+    method / class functions
+
+the move(volts) function takes in a voltage number ranging from your max volts to your negative max volts. by default
+this is 5 to -5, 5 being forward and -5 being reverse. it will move both motors at the same time at the with the same
+voltage.
+
+example:
+motor.move(5)
+
+the turn(volts) function takes in a voltage number ranging from your max volts to your negative max volts. by default
+this is 5 to -5, 5 being a turn in one direction and -5 being a turn in the opposite direction. 
+it will move both motors at the same time at the with opposite voltages.
+
+example:
+motor.turn(-5)
+
+the move_ungrouped(volts_for_motor_1, volts_for_motor_2) function is able to send seperate voltages to each motor.
+it would work the same way as having a seperate move(volts) function for each motor.
+
+example:
+motor.move_ungrouped(-5, 3)
+
+the stop() function stopped both of the motors by setting their PWM duty cycle (and thus their volts) to 0.
+
+example:
+motor.move(5)
+# add some delay
+motor.stop()
+
+    Notes
+
+NA
+
+example:
+from MOTOR_CONTROLLER.py import create_MOTOR_CONTROLLER
+motor = create_MOTOR_CONTROLLER(1, 2, 3, 4)
+
+motor.move(5)
+# add some delay
+motor.stop()
+# add some delay
+motor.turn(3)
+# add some delay
+motor.stop()
+# add some delay
+motor.move_ungrouped(5,1)
+# add some delay
+motor.stop()

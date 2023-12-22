@@ -1,0 +1,75 @@
+OUT_PIN documentation
+
+Cole Johnson 11/21/23
+
+this is documentation for the IN_PIN method and should be used to read high and low voltages running into
+the board. Should be used for button or switches.
+
+
+    Constructor and init function
+
+the in pin object can be created by calling
+
+from OUT_PIN.py import create_OUT_PIN
+out_pin = create_OUT_PIN(pin, v_high = 1)
+
+the parameters for create_OUT_PIN is the pin number on the board, and if you are sending out a low or high voltage by 
+default by the board. If high is 1 (which it is by default so you can write create_OUT_PIN(pin) and not include the high 
+parameter) the board send out a voltage, if high is 0 it is going to stop sending a voltage when its high. 
+you need to figue out if your circuit is pull up or pull down.
+
+
+    method / class functions
+
+the function value(v) sets the pins output to high or low. by defualt 1 is high and 0 is low.
+
+example:
+print(out_pin.value(1))
+
+the function toggle() will swap the output to its opposite. if its sending its high voltage, it will now send its low.
+
+example:
+while True:
+    out_pin.toggle()
+    # add a short delay
+
+the function on() will set the output to its high voltage.
+
+the function off() will set the output to its low voltage
+
+example
+out_pin.on()
+# add a short delay
+out_pin.off()
+
+the function is_on() returns True if the output pin is currently sending its high voltage out, and false if not.
+
+the function is_off() returns True if the output pin is currently sending its low voltage out, and false if not.
+
+example:
+out_pin.on()
+print(out_pin.is_on())
+print(out_pin.is_off())
+out_pin.off()
+print(out_pin.is_on())
+print(out_pin.is_off())
+
+the function get_pin_num() returns the board pin number of the input pin object. if the pin is on pin 5, this
+function will return 5 as an int.
+
+the function get_in_pin_obj_raw() returns the raw input pin object.
+
+
+    Notes
+
+the functions get_pin_num() and get_in_pin_obj_raw() are not the most useful for general code, and are mainly used
+for debugging issues.
+
+example:
+
+from IN_PIN.py import create_IN_PIN
+button = create_IN_PIN(1)
+
+while True:
+    print(button.toggle())
+    # add a slight delay

@@ -1,0 +1,62 @@
+GPS documentation
+
+Cole Johnson 12/5/23
+
+this is documentation for the GPS method and can be used to setup a gps sensor object in your code.
+
+    Constructor and init function
+
+the gps object can be created by calling
+
+from GPS import create_GPS
+gps = create_GPS(serial)
+
+the parameter for the init function is the rx tx pin serial. a pico w has rx tx 0 and rx tx 1 pins so you pass either
+0 or 1.
+
+
+    method / class functions
+
+The next 3 all relate to getting the gps position.
+
+the actual_location_tuple() function gets you a tuple of your current lat and lon values ready by the gps sensor.
+
+the lon() function gets the current lon data from the gps sensor.
+
+the lat() function gets the current lat data from the gps sensor.
+
+
+the satellites() funciton gets the numbr of sats the gps sensor is connected to.
+
+the angle() function gets the angle of the gps sensor based off its movement in gps polar format (0N, 90E, 180S, 270W).
+
+the speed() function gets the speed of the gps sensor in knots relative to the ground.
+
+the store_point() and get_stored_point() functions are a way to store a current gps point, and read that points data
+at a later time. store_point() will save a tuple of the current lat and lon values, and get_stored_point()
+will return it when called.
+
+the update() function will update the information in the gps method if there is any new information.
+This should be done about twice as often as information is read. it will also return a boolean based on if there
+is any new information (true if there is, false if there is not).
+
+the get_uart() function gets the base uart object and its values.
+
+the get_gps() function gets the base gps object.
+
+
+    Notes
+
+the get_uart() and get_gps() function should only be used for debugging and nothing else.
+
+example:
+
+gps = create_GPS(0)
+c = 0
+while True:
+    c += 1
+    gps.update()
+    if c % 2 == 0: # code in the if statement will happen every 2 times the loop runs
+        print(gps.actual_location_tuple())
+    # add a delay
+    
